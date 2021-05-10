@@ -3,5 +3,6 @@
 <p>
 Son titre: <%= @gossip.title %> <br/>
 Son auteur : <%= link_to @gossip.user.first_name, user_path(@gossip.user.id) %> <br/>
-Son contenu : <%= @gossip.content %> 
+Son contenu : <%= @gossip.content %> <br/>
+Créé le :<%= @gossip.created_at%>
 </p>
