@@ -1,0 +1,7 @@
+<h1>Hello , voici le gossip numéro <%= params["gossip_id"] %>  ! </h1>
+
+<p>
+Son titre: <%= @gossip.title %> <br/>
+Son auteur : <%= @gossip.user.first_name%> <br/>
+Son contenu : <%= @gossip.content %> 
+</p>

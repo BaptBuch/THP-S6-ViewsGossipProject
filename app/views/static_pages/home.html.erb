@@ -1,2 +1,34 @@
-<h1>StaticPages#home</h1>
-<p>Find me in app/views/static_pages/home.html.erb</p>
+<html class="bg-light">
+    <body class="container text-center bg-light">
+
+        <div class="container text-center w-50 bg-light">
+        <h1> Salut à toi jeune moussaillon, est-ce que tu veux des potins ? </h1>
+            <!-- <main class="container form-signin p-5 ">
+                <form action="/" method="post">
+                    <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+                    <h1 class="h3 mb-5 fw-normal">Pour accéder à la page des gossips tu dois renseigner ton prénom et ta ville</h1>
+
+                    <div class="container form text-center w-75">
+                    <input type="text" class="form-control" id="floatingInput" name="first_name" >
+                    </div>
+
+                    <button class=" btn btn-lg btn-primary mt-2 w-50" type="submit">Entrer</button>
+                    <p class="mt-5 mb-3 text-muted">© 2021</p>
+  
+
+                </form>
+            </main> -->
+
+            <%= @gossips.each do |gossip| %> 
+                <p>
+                Gossip numéro <%= gossip.id%> :  <br/>
+                Son titre: <%= gossip.title %> <br/>
+                Son auteur : <%= gossip.user.first_name%>
+                Pour lire son contenu, <%= link_to "clique ici !", gossip_id_path(@gossip id) %>%>
+                </p>
+            <% end %>
+
+        </div>
+
+    </body>
+</html>

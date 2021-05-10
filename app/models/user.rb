@@ -1,5 +1,5 @@
 class User < ApplicationRecord
-  belongs_to :city
+  belongs_to :city, optional: true
   has_many :gossips
   has_many :likes
   has_many :comments, as: :comment_type
