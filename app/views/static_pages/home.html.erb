@@ -20,7 +20,7 @@
             </main> -->
 
             <% @gossips.each do |gossip| %> 
-                
+            <div class="card-group">    
               <div class="card" style="width: 18rem;">
                 <img class="card-img-top" src="https://img.pngio.com/gossip-podcast-gossip-png-500_500.png" alt="Card image cap">
                   <div class="card-body">
@@ -30,7 +30,7 @@
                     <%= link_to "Lire son contenu", gossip_path(gossip), class:"btn btn-primary" %>
                   </div>
               </div>
-                
+            </div>    
             <% end %>
 
         </div>
