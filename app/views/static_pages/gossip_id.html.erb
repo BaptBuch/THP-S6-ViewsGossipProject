@@ -2,6 +2,6 @@
 
 <p>
 Son titre: <%= @gossip.title %> <br/>
-Son auteur : <%= @gossip.user.first_name%> <br/>
+Son auteur : <%= link_to @gossip.user.first_name, user_path(@gossip.user.id) %> <br/>
 Son contenu : <%= @gossip.content %> 
 </p>

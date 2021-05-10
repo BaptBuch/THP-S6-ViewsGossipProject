@@ -19,13 +19,18 @@
                 </form>
             </main> -->
 
-            <%= @gossips.each do |gossip| %> 
-                <p>
-                Gossip numéro <%= gossip.id%> :  <br/>
-                Son titre: <%= gossip.title %> <br/>
-                Son auteur : <%= gossip.user.first_name%>
-                Pour lire son contenu, <%= link_to "clique ici !", gossip_id_path(@gossip id) %>%>
-                </p>
+            <% @gossips.each do |gossip| %> 
+                
+              <div class="card" style="width: 18rem;">
+                <img class="card-img-top" src="https://img.pngio.com/gossip-podcast-gossip-png-500_500.png" alt="Card image cap">
+                  <div class="card-body">
+                    <h5 class="card-title"> Gossip numéro <%= gossip.id%>  </h5>
+                    <p class="card-text"> Son titre: <%= gossip.title%> </p>
+                    <p> Son auteur : <%= gossip.user.first_name%> </p>
+                    <%= link_to "Lire son contenu", gossip_path(gossip), class:"btn btn-primary" %>
+                  </div>
+              </div>
+                
             <% end %>
 
         </div>
