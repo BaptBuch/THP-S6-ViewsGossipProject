@@ -10,7 +10,7 @@ class StaticPagesController < ApplicationController
 
   def gossip_id
     @gossip = Gossip.find(params["gossip_id"])
-    @user = User.all
+    @user = User.all #find(@gossip.user_id)
   end
 
   def user_id
