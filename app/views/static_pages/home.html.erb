@@ -1,39 +1,38 @@
-<html class="bg-light">
-    <body class="container text-center bg-light">
+<html>
 
-        <div class="container text-center w-50 bg-light">
-        <h1> Salut à toi jeune moussaillon, est-ce que tu veux des potins ? </h1>
-            <!-- <main class="container form-signin p-5 ">
-                <form action="/" method="post">
-                    <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
-                    <h1 class="h3 mb-5 fw-normal">Pour accéder à la page des gossips tu dois renseigner ton prénom et ta ville</h1>
-
-                    <div class="container form text-center w-75">
-                    <input type="text" class="form-control" id="floatingInput" name="first_name" >
-                    </div>
-
-                    <button class=" btn btn-lg btn-primary mt-2 w-50" type="submit">Entrer</button>
-                    <p class="mt-5 mb-3 text-muted">© 2021</p>
   
-
-                </form>
-            </main> -->
-
-            <% @gossips.each do |gossip| %> 
-            <div class="card-group">    
-              <div class="card" style="width: 18rem;">
-                <img class="card-img-top" src="https://img.pngio.com/gossip-podcast-gossip-png-500_500.png" alt="Card image cap">
-                  <div class="card-body">
-                    <h5 class="card-title"> Gossip numéro <%= gossip.id%>  </h5>
-                    <p class="card-text"> Son titre: <%= gossip.title%> </p>
-                    <p> Son auteur : <%= gossip.user.first_name%> </p>
-                    <%= link_to "Lire son contenu", gossip_path(gossip), class:"btn btn-primary" %>
-                  </div>
-              </div>
-            </div>    
-            <% end %>
-
+  
+  <body class= bg-light>
+    <header>
+        <div class="px-4 py-5 my-5 text-center">
+          <h1 class="display-5 fw-bold">Bienvenue sur GOSSIP</h1>
+            <div class="col-lg-6 mx-auto">
+              <p class="lead mb-4">est-ce que tu veux des potins ?</p>
+            <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
         </div>
+    </header>
 
-    </body>
+    <main class="container card-group">
+      <% @gossips.each do |gossip| %> 
+                  
+
+        <div class="row row-cols-1 row-cols-md-2 g-4">
+          <div class="col">
+            <div class="card m-3 bg-white text-dark" style="width: 18rem;">
+              <img src="https://img.pngio.com/gossip-podcast-gossip-png-500_500.png" class="card-img-top" alt="...">
+              <div class="card-body text-center">
+                <h5 class="card-title text-muted small">Gossip numéro <%= gossip.id%></h5>
+                <p class="card-text ">Son titre: <%= gossip.title%></p>
+                <p class="card-text text-primary small"> Son auteur : <%= gossip.user.first_name%> </p>
+                <%= link_to "Lire son contenu", gossip_path(gossip), class:"btn btn-primary" %>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+      <% end %>
+    </main>
+
+  </body>
+
 </html>
