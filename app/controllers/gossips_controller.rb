@@ -18,8 +18,7 @@ class GossipsController < ApplicationController
     @gossip = Gossip.new
     @gossip.title = params[:title]
     @gossip.content = params[:content]
-    @gossip.user_id = 21
-    @gossip.user.first_name = "anonymous"
+    @gossip.user = User.find(11)
 
     if @gossip.save # essaie de sauvegarder en base @gossip
       # si ça marche, il redirige vers la page d'index du site
