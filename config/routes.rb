@@ -4,10 +4,14 @@ Rails.application.routes.draw do
   get '/team', to: 'static_pages#team'
 
   get '/contact', to: 'static_pages#contact'
+
+  get '/welcome/:id', to: 'dynamic_pages#show'
   
   resources :gossips, except: [:destroy]
 
   resources :users
+
+  resources :dynamic_pages
 
 end
 
