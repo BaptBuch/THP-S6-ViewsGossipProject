@@ -24,5 +24,5 @@ end
 
 20.times do
   u = User.all.sample
-  gossip = Gossip.create(title: Faker::Movie.quote, content: Faker::Lorem.paragraph, user: u)
+  gossip = Gossip.create(title: Faker::Lorem.word, content: Faker::Lorem.paragraph, user: u)
 end

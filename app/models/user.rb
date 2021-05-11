@@ -1,4 +1,8 @@
 class User < ApplicationRecord
+  validates :email, 
+    presence: true,
+    uniqueness: true
+    #length: {in: 6..20}
   belongs_to :city, optional: true
   has_many :gossips
   has_many :likes

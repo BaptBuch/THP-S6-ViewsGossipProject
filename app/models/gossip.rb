@@ -1,10 +1,9 @@
 class Gossip < ApplicationRecord
-  validates :email, 
+  validates :title, 
     presence: true,
-    uniqueness: true,
-    length: {in: 6..20}
+    length: {in: 3..14}
   validates :content, presence: true
-  belongs_to :user
+  belongs_to :user, optional: true
   belongs_to :tag, optional: true
   has_many :likes
   has_many :comments, as: :comment_type
