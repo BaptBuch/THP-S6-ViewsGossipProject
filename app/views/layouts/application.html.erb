@@ -18,6 +18,10 @@
       </ul>
     </header>
 
+    <% flash.each do |k, v| %>
+      <div id="<%= k %>"><%= v %></div>
+    <% end %>
+
  </head>
 
  <body>
