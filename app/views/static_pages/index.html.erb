@@ -25,6 +25,8 @@
                 <p class="card-text ">Son titre: <%= gossip.title%></p>
                 <p class="card-text text-primary small"> Son auteur : <%= gossip.user.first_name%> </p>
                 <%= link_to "Lire son contenu", gossip_path(gossip.id), class:"btn btn-primary" %>
+                <%= link_to "Editer son contenu", edit_gossip_path(gossip.id), class:"btn btn-outline-info" %>
+                
               </div>
             </div>
           </div>

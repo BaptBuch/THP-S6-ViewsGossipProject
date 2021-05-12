@@ -7,7 +7,7 @@ Rails.application.routes.draw do
 
   get '/welcome/:id', to: 'dynamic_pages#show'
   
-  resources :gossips, except: [:destroy]
+  resources :gossips
 
   resources :users
 
