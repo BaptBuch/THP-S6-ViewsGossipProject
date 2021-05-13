@@ -12,9 +12,9 @@ class User < ApplicationRecord
 
   has_many :gossips
 
-  has_many :likes
+  has_many :likes, dependent: :destroy
 
-  has_many :comments
+  has_many :comments, dependent: :destroy
 
   has_many :sent_messages, foreign_key: 'sender_id', class_name: "PrivateMessage"
   

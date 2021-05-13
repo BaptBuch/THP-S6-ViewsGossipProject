@@ -9,7 +9,6 @@
               <p class="lead mb-4">Et tu peux aussi en créer en cliquant sur le bouton ci-dessous (mais il faudra t'inscrire chez nous) :</p>
               <%= link_to 'Balance ton potin !', new_gossip_path, class:"btn btn-warning" %>  <br/>
             <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
-          <p>Si tu as déjà un compte utilisateur chez nous: <%= link_to 'Se connecter', new_session_path, class:"btn btn-success" %> 
         </div>
     </section>
 
@@ -26,8 +25,7 @@
                 <p class="card-text ">Son titre: <%= gossip.title%></p>
                 <p class="card-text text-primary small"> Son auteur : <%= gossip.user.first_name%> </p>
                 <%= link_to "Lire son contenu", gossip_path(gossip.id), class:"btn btn-primary" %>
-                <%= link_to "Editer son contenu", edit_gossip_path(gossip.id), class:"btn btn-outline-info" %>
-                
+                <p class="card-text "><%= gossip.likes.count %> <%= (gossip.likes.count) == 1 ? 'Like' : 'Likes'%></p>               
               </div>
             </div>
           </div>

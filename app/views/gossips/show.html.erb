@@ -5,22 +5,37 @@ Son titre: <%= @gossip.title %> <br/>
 Son auteur : <%= link_to @gossip.user.first_name, user_path(@gossip.user_id) %> <br/>
 Son contenu : <%= @gossip.content %> <br/>
 Créé le :<%= @gossip.created_at%> <br/>
-<%= link_to "Modifier ce gossip", edit_gossip_path(@gossip.id), class:"btn btn-outline-info" %> <br/>
+
+<% if @gossip.user_id == current_user.id %>
+   
+    <%= link_to "Modifier ce gossip", edit_gossip_path(@gossip.id), class:"btn btn-outline-info" %> 
+    <br/>
+
+<% end %>
 <%= link_to "Supprimer ce gossip", gossip_path(@gossip.id), class:"btn btn-danger", method: "delete"%>
+<br/>
+
+<% pre_like = @gossip.likes.find { |like| like.user_id == current_user.id} %>
+<% if pre_like %>
+  <%= button_to 'Unlike', gossip_like_path(@gossip, pre_like), method: :delete %>
+<% else %>
+  <%= button_to 'Like', gossip_likes_path(@gossip), method: :post %>
+<% end %>
+
 </p>
 
 <p> Ajouter un commentaire </p>
  
- <div class="container">
-    
- <%= form_tag(gossip_comments_path(:id), method: "post") do %>
-    <%= text_field_tag 'gossip_id', @id, type: 'hidden', class: 'form-control' %>
-     <div class="form-group">
-         <%= label_tag 'Nouveau commentaire' %>
-         <%= text_area_tag 'content', '', required: true, class: 'form-control' %>
-     </div>
-    <%= submit_tag "Envoyer", class: 'btn btn-outline-primary btn-sm' %>
- <% end %>                
-
+<div class="card my-1"> # place this card blow the post body.
+  <div class="card-body">
+    <p class="font-weight-bold">Comments</p>
+    <%= form_with(model: [@gossip, @gossip.comments.build]) do |f| %>
+      <div class="form-group">
+        <%= f.label 'New comment' %>
+        <%= f.text_area :body, class: 'form-control' %>
+      </div>
+      <%= f.submit 'Submit', class: 'btn btn-primary' %>
+    <% end %>
+  </div>
 </div>
 

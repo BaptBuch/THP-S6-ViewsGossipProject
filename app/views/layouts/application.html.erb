@@ -11,24 +11,42 @@
    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
 
   <header class="d-flex justify-content-center py-3">
-      <ul class="nav nav-pills">
-        <li class="nav-item"><%= link_to "Home", root_path, class: "nav-link active"%></li>
-        <li class="nav-item"><%= link_to "Team", team_path, class: "nav-link"%></li>
-        <li class="nav-item"><%= link_to "Contact", contact_path, class: "nav-link"%></li>
-        <li class="nav-item"><%= link_to "Rejoindre The Gossip Project", new_user_path, class: "nav-link"%></li>
-      </ul>
-    </header>
-
-    <% flash.each do |k, v| %>
-      <div id="<%= k %>"><%= v %></div>
-    <% end %>
-
+    <ul class="nav nav-pills">
+      <li class="nav-item"><%= link_to "Home", root_path, class: "nav-link active"%></li>
+      <li class="nav-item"><%= link_to "Team", team_path, class: "nav-link"%></li>
+      <li class="nav-item"><%= link_to "Contact", contact_path, class: "nav-link"%></li>
+      
+      <% if current_user == nil %>
+        <li class="nav-item">        
+            <%= link_to 'Se connecter', new_session_path, class:"nav-link" %>
+        </li>
+        <li class="nav-item">
+            <%= link_to "Rejoindre The Gossip Project", new_user_path, class: "nav-link"%>
+        </li>
+      
+      <% elsif current_user != nil %> 
+        <li class="nav-item">
+            <%= link_to User.find_by(id: session[:user_id]).first_name, profile_path, class: "nav-link" %>
+        </li>
+        <li class="nav-item">
+            <%= link_to "Se déconnecter", session_path(session.id), class:"btn btn-danger", method: :delete %>
+        </li>
+      <% end %>
+    </ul>
+  </header>
  </head>
 
  <body>
-   <%= yield %>
 
-
+    
+    <% flash.each do |name, msg|%>
+      
+      <div class="alert alert-<%= name %>"><%= msg %></div>
+    
+    <% end %>
+    
+  <%= yield %>
+ 
+  
  </body>
-
 </html>

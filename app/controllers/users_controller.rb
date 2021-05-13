@@ -10,12 +10,19 @@ class UsersController < ApplicationController
     @user.last_name = params[:last_name]
     @user.email = params[:email]
     @user.password = params[:password]
-
+    @user.description = params[:description]
+    @user.city_id = params[:city]
+    @user.age = params[:age]
+    
     if @user.save
-      redirect_to(root_path)
+      log_in(@user)
+      session[:user_id] = @user.id
+      redirect_to(profile_path)
+    
     else
       render "new"
-      puts @user.errors.messages
+      puts "erreur"
+      
     end
 
   end

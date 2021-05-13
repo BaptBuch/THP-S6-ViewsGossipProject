@@ -9,7 +9,7 @@ class Gossip < ApplicationRecord
 
   belongs_to :tag, optional: true
 
-  has_many :likes
+  has_many :likes, dependent: :destroy
 
-  has_many :comments, foreign_key: 'gossip.id'
+  has_many :comments, dependent: :destroy
 end

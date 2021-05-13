@@ -14,6 +14,10 @@ Rails.application.routes.draw do
     resources :comments
   end
 
+  resources :gossips do
+    resources :likes
+  end
+
   resources :users
 
   resources :cities

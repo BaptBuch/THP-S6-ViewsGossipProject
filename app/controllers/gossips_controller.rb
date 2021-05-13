@@ -1,4 +1,8 @@
 class GossipsController < ApplicationController
+  
+  before_action :verify_connection, only: [:new, :create, :show]
+  before_action :gossip_creator, only: [:edit, :update, :destroy]
+  
   def index
     # Méthode qui récupère tous les potins et les envoie à la view index (index.html.erb) pour affichage
     @gossips = Gossip.all
@@ -20,29 +24,25 @@ class GossipsController < ApplicationController
     @gossip = Gossip.new
     @gossip.title = params[:title]
     @gossip.content = params[:content]
-    @gossip.user = User.find(11)
+    @gossip.user = current_user
 
-    if @gossip.save # essaie de sauvegarder en base @gossip
-      # si ça marche, il redirige vers la page d'index du site
+    if @gossip.save
+      flash[:success] = "Gossip sauvegardé."
       redirect_to(root_path)
     else
       render "new"
-      # sinon, il render la view new (qui est celle sur laquelle on est déjà)
     end
   end
 
   def edit
-    # Méthode qui récupère le potin concerné et l'envoie à la view edit (edit.html.erb) pour affichage dans un formulaire d'édition
     @gossip = Gossip.find(params[:id])
   end
 
   def update
-    # Méthode qui met à jour le potin à partir du contenu du formulaire de edit.html.erb, soumis par l'utilisateur
-    # pour info, le contenu de ce formulaire sera accessible dans le hash params
-    # Une fois la modification faite, on redirige généralement vers la méthode show (pour afficher le potin modifié)
     @gossip = Gossip.find(params[:id])
     gossip_params = params.require(:gossip).permit(:title, :content)
     if @gossip.update(gossip_params)
+      flash[:success] = "Gossip mis à jour."
       redirect_to(@gossip)
     else
       render :edit
@@ -50,10 +50,26 @@ class GossipsController < ApplicationController
   end
 
   def destroy
-    # Méthode qui récupère le potin concerné et le détruit en base
-    # Une fois la suppression faite, on redirige généralement vers la méthode index (pour afficher la liste à jour)
     @gossip = Gossip.find(params[:id])
     @gossip.destroy
     redirect_to(root_path)
   end
+
+  private
+
+  def verify_connection
+    unless current_user
+      flash[:info] = "Please log in."
+      redirect_to new_session_path
+    end
+  end
+
+  def gossip_creator
+    @gossip = Gossip.find(params[:id])
+    unless @gossip.user_id == current_user.id
+      flash[:danger] = "Seul le créateur du potin peut supprimer un potin."
+      redirect_to gossip_path
+    end
+  end
+
 end
