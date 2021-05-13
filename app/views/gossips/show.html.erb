@@ -10,88 +10,75 @@
         </ul>
       </div>  
   <% end %>
+  <body>
+    <header class="bg-dark ">
+      <div class="container p-5 mb-4 rounded-3 text-light">
+            <div class="container-fluid py-5">
+              
+                <p class="text-muted ">Gossip n°<%= params[:id] %></p>
+                <h2 class="col-md-8 display-4">Son titre: <%= @gossip.title %></h2>
+                <p>Son contenu : <%= @gossip.content %> </p>
+                <p class="text-muted">Ecrit par <%= link_to @gossip.user.first_name, user_path(@gossip.user_id) %>  </p>
+                <p class="text-muted">Créé le :<%= @gossip.created_at%></p>
+                <div class="row pt-3">
+                  <% if @gossip.user_id == current_user.id %>
+                  <p class="col-2"><%= link_to "Modifier ce gossip", edit_gossip_path(@gossip.id), class:"btn btn-outline-warning" %></p> 
+                  <% end %>
+                  <p class="col-2"><%= link_to "Supprimer ce gossip", gossip_path(@gossip.id), class:"btn btn-danger", method: "delete"%></p>
+      
+                    <% pre_like = @gossip.likes.find { |like| like.user_id == current_user.id} %>
+                  <% if pre_like %>
+                    <%= button_to 'Unlike', gossip_like_path(@gossip, pre_like), method: :delete %>
+                   <% else %>
+                    <%= button_to 'Like', gossip_likes_path(@gossip), method: :post %>
+                  <% end %>
+                </div>
+            </div>
+      </div>
+      
+    </header>
 
-  <div class="container p-5 mb-4  rounded-3">
-        <div class="container-fluid py-5">
-            <h1 class="display-5 fw-bold">Bienvenue <%= User.find_by(id: session[:user_id]).first_name %> !</h1>
-            <p class="col-md-8 fs-4">Prénom : <%= User.find_by(id: session[:user_id]).first_name %></p>
-            <p class="col-md-8 fs-4">Nom : <%= User.find_by(id: session[:user_id]).last_name %></p>
-            <p class="col-md-8 fs-4">Email :<%= User.find_by(id: session[:user_id]).email %></p>
-            <p class="col-md-8 fs-4">Age :<%= User.find_by(id: session[:user_id]).age%></p>
-            <p class="col-md-8 fs-4">Description :<%= User.find_by(id: session[:user_id]).description %></p>
+    <section class= "container pt-5 pb-5">
+        <h3> Vous souhaitez réagir à ce gossip ? Laissez un commentaire </h3>
+        <div class="pb-4 pt-4">
+        <%= form_tag(gossip_comments_path(@gossip), method: "post") do %>
+            <%= text_field_tag 'gossip_id', @id, type: 'hidden', class: 'form-control' %>
+            <div class="form-group">
+                <%= label_tag 'Nouveau commentaire' %>
+                <%= text_area_tag 'content', '', required: true, class: 'form-control mt-3' %>
+            </div>
+            
+            <%= submit_tag "Envoyer", class: 'btn btn-outline-warning btn-sm mt-3 ' %>
+        <% end %>
+        </div>     
 
-            <%= link_to "Se déconnecter",  session_path(session.id), class:'btn btn-danger text-light', method: :delete %>
-        </div>
-  </div>
-</html>
-
-
-
-
-
-
-
-<h1>Hello , voici le gossip numéro <%= params[:id] %>  ! </h1>
-
-<p>
-Son titre: <%= @gossip.title %> <br/>
-Son auteur : <%= link_to @gossip.user.first_name, user_path(@gossip.user_id) %> <br/>
-Son contenu : <%= @gossip.content %> <br/>
-Créé le :<%= @gossip.created_at%> <br/>
-
-<% if @gossip.user_id == current_user.id %>
-   
-    <%= link_to "Modifier ce gossip", edit_gossip_path(@gossip.id), class:"btn btn-outline-info" %> 
-    <br/>
-
-<% end %>
-<%= link_to "Supprimer ce gossip", gossip_path(@gossip.id), class:"btn btn-danger", method: "delete"%>
-<br/>
-
-<% pre_like = @gossip.likes.find { |like| like.user_id == current_user.id} %>
-<% if pre_like %>
-  <%= button_to 'Unlike', gossip_like_path(@gossip, pre_like), method: :delete %>
-<% else %>
-  <%= button_to 'Like', gossip_likes_path(@gossip), method: :post %>
-<% end %>
-
-</p>
-
-<p> Ajouter un commentaire </p>
- 
-  <%= form_tag(gossip_comments_path(@gossip), method: "post") do %>
-    <%= text_field_tag 'gossip_id', @id, type: 'hidden', class: 'form-control' %>
-     <div class="form-group">
-         <%= label_tag 'Nouveau commentaire' %>
-         <%= text_area_tag 'content', '', required: true, class: 'form-control' %>
-     </div>
-    <%= submit_tag "Envoyer", class: 'btn btn-outline-primary btn-sm' %>
- <% end %>                
-
-</div>
-
-<div class="list-group mx-auto">
+        <div class="list-group mx-auto">
 
     <% @gossip.comments.reverse.each do |comment| %>
 
       <div class="list-group-item mb-2">
         <div class="row">
           <div class="col-9">
-              <p class="mb-1"><%= comment.content %></p>
-              <p class="mb-1"><%= comment.user.first_name%></p>
-            </div>
-            <div class="col-3 text-right">
-            <% if comment.user.id == current_user.id %>
-            <small><%= link_to "Edit", edit_gossip_comment_path(@gossip.id, comment.id) %></small>
+              <p class="mb-1 fs-3"><%= comment.content %></p>
+              <p class="mb-1 text-muted pt-3"><%= comment.user.first_name%></p>
+              <% if comment.user.id == current_user.id %>
+              <p><%= link_to "Edit", edit_gossip_comment_path(@gossip.id, comment.id), class:"btn-outline-info text-right" %></p>
             
             <% end %>
-            
           </div>
+           
+          
         </div>
       </div>
 
     <% end %>
 
   </div>
+      
+      </section>
 
-</div>
+  </body>
+</html>
+
+
+

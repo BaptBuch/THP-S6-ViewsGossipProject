@@ -1,24 +1,40 @@
-<h1>Hello , voici la ville <%= @city.name %> <%= params[:id] %> ! </h1>
-
-<p>
-Son nom: <%= @city.name %> <br/>
-Ses users :   
-<p class="mt-3">Liste des potins</p>
-    <ul class="row d-flex justify-content-start">
+<html>
+    <header class="bg-dark ">
+        <div class="container p-5 mb-4 rounded-3 text-light">
+            <div class="container-fluid py-5">
+                <h2 class="col-md-8 display-4"><%= @city.name %> <%= params[:id] %></h2>
+            </div>
+      
+        </div>
+      
+    </header>
+    <div class= "container p-5">
+        <h3>Découvre les Gossips de cette ville : </h3>
+    </div>
+    <section class="container card-group">
         <% @gossips.each do |g| %>
-            <li class="col-12 col-md-4 col-lg-3 mb-3">
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title"><%= g.title %></h5>
-                        <div class="card-text"><%= g.user.first_name %></div>
-                        <div class="mt-3">
-                            <%= link_to g.title, gossip_path(g.id), class: "btn btn-success" %>
+            <div class="row row-cols-1 row-cols-md-2 g-4">
+                <div class="col">
+
+                    <div class="card m-3 bg-white text-dark" style="width: 18rem;">
+                        <img src="https://img.pngio.com/gossip-podcast-gossip-png-500_500.png" class="card-img-top" alt="...">
+                        <div class="card-body text-center">
+                                
+                            <p class="card-title fs-2"><%= g.title %></p>
+                            <p class="card-text text-muted">Ecrit par: <%= g.user.first_name %></p>
+                            <%= link_to 'voir le gossip', gossip_path(g.id), class: "btn btn-success" %>              
                         </div>
                     </div>
                 </div>
-            </li>
-        <% end %>
-    </ul>
+            </div>         
+                    
+        <% end %>            
+               
+    </section>
+    
+        
+ 
+
+</html>
 
 
-</p

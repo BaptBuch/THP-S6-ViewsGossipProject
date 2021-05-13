@@ -5,7 +5,7 @@
             <h1 class="display-5 fw-bold">Hello, voici notre auteur de potins numéro <%= params[:id] %>  ! </h1>
             <p class="col-md-8 fs-4">Son prénom: <%= @user.first_name %></p>
             <p class="col-md-8 fs-4">Son nom de famille: <%= @user.last_name %></p>
-            <p class="col-md-8 fs-4">Sa ville : <%= link_to @user.city.name, city_path(@user.city_id)%></p>
+            <p class="col-md-8 fs-4">Sa ville : <%= link_to @user.city.name, city_path(@user.city_id)%> </p>
             <p class="col-md-8 fs-4">Son âge : <%= @user.age %></p>
             <p class="col-md-8 fs-4">Son email : <%= @user.email %></p>
         </div>
