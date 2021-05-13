@@ -19,7 +19,7 @@ end
 
 10.times do
   cities_list = City.all
-  User.create!(first_name: Faker::Superhero.name, last_name: Faker::Superhero.suffix, description: Faker::Hipster.sentence, email:Faker::Internet.email, age: Faker::Number.between(from: 18, to: 100), city: cities_list.sample)
+  User.create!(first_name: Faker::Superhero.name, last_name: Faker::Superhero.suffix, description: Faker::Hipster.sentence, email:Faker::Internet.email, age: Faker::Number.between(from: 18, to: 100), city: cities_list.sample, password: Faker::Lorem.characters(number: 10))
 end
 
 20.times do

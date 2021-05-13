@@ -1,4 +1,6 @@
-<% if @gossip.errors.any? %>
+<html>
+
+  <% if @gossip.errors.any? %>
       <div class="alert alert-danger" role="alert">
         <p>Nous n'avons pas réussi à créer le potin pour la (ou les) raison(s) suivante(s) :</p>
         <ul>
@@ -7,7 +9,26 @@
           <% end %>
         </ul>
       </div>  
-    <% end %>
+  <% end %>
+
+  <div class="container p-5 mb-4  rounded-3">
+        <div class="container-fluid py-5">
+            <h1 class="display-5 fw-bold">Bienvenue <%= User.find_by(id: session[:user_id]).first_name %> !</h1>
+            <p class="col-md-8 fs-4">Prénom : <%= User.find_by(id: session[:user_id]).first_name %></p>
+            <p class="col-md-8 fs-4">Nom : <%= User.find_by(id: session[:user_id]).last_name %></p>
+            <p class="col-md-8 fs-4">Email :<%= User.find_by(id: session[:user_id]).email %></p>
+            <p class="col-md-8 fs-4">Age :<%= User.find_by(id: session[:user_id]).age%></p>
+            <p class="col-md-8 fs-4">Description :<%= User.find_by(id: session[:user_id]).description %></p>
+
+            <%= link_to "Se déconnecter",  session_path(session.id), class:'btn btn-danger text-light', method: :delete %>
+        </div>
+  </div>
+</html>
+
+
+
+
+
 
 
 <h1>Hello , voici le gossip numéro <%= params[:id] %>  ! </h1>

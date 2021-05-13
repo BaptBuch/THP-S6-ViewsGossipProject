@@ -10,23 +10,23 @@
    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
 
-  <header class="d-flex justify-content-center py-3">
-    <ul class="nav nav-pills">
-      <li class="nav-item"><%= link_to "Home", root_path, class: "nav-link active"%></li>
-      <li class="nav-item"><%= link_to "Team", team_path, class: "nav-link"%></li>
-      <li class="nav-item"><%= link_to "Contact", contact_path, class: "nav-link"%></li>
+  <header class="d-flex justify-content-center py-3 bg-dark text-light">
+    <ul class="nav nav-pills ">
+      <li class="nav-item "><%= link_to "Home", root_path, class: "nav-link text-light"%></li>
+      <li class="nav-item"><%= link_to "Team", team_path, class: "nav-link text-light"%></li>
+      <li class="nav-item"><%= link_to "Contact", contact_path, class: "nav-link text-light"%></li>
       
       <% if current_user == nil %>
         <li class="nav-item">        
-            <%= link_to 'Se connecter', new_session_path, class:"nav-link" %>
+            <%= link_to 'Se connecter', new_session_path, class:"nav-link text-light" %>
         </li>
         <li class="nav-item">
-            <%= link_to "Rejoindre The Gossip Project", new_user_path, class: "nav-link"%>
+            <%= link_to "Rejoindre The Gossip Project", new_user_path, class: "nav-link active bg-warning text-dark "%>
         </li>
       
       <% elsif current_user != nil %> 
         <li class="nav-item">
-            <%= link_to User.find_by(id: session[:user_id]).first_name, profile_path, class: "nav-link" %>
+            <%= link_to User.find_by(id: session[:user_id]).first_name, profile_path, class: "nav-link text-dark" %>
         </li>
         <li class="nav-item">
             <%= link_to "Se déconnecter", session_path(session.id), class:"btn btn-danger", method: :delete %>

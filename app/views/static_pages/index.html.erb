@@ -1,16 +1,53 @@
 <html>
   <body class= bg-light>
-    <section>
-        <div class="px-4 py-5 my-5 text-center">
-          <h1 class="display-5 fw-bold">Bienvenue sur The GOSSIP PROJECT</h1>
-            <div class="col-lg-6 mx-auto">
-              <p class="lead mb-4">Sinon, je suppose que tu es là parce que tu veux des potins ?</p>
-              <p class="lead mb-4">Alors en voici en voilà !</p>
-              <p class="lead mb-4">Et tu peux aussi en créer en cliquant sur le bouton ci-dessous (mais il faudra t'inscrire chez nous) :</p>
-              <%= link_to 'Balance ton potin !', new_gossip_path, class:"btn btn-warning" %>  <br/>
-            <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+
+    <header class="bg-dark pb-5">
+    <section class="bg-dark text-light">
+        <div class="container pt-5 pb-5 mt-lg-6">
+          <div class="row pt-5 pb-5">
+            <div class="col">
+              <h3 class="display-5 fw-lighter ">Bienvenue sur </h3>
+              <h1 class="display-1 fw-bold"> The GOSSIP PROJECT</h1>
+              <div class="my-4">
+                <p class="lead text-muted">Est-ce que vous voulez des gossip ? Créez-en un sans plus tarder !</p>
+                
+              </div>
+              <div class="">
+                <div class="row w-50 justify-content-start">
+                  <div>
+                    <%= link_to 'Balance ton potin !', new_gossip_path, class:"btn btn-warning" %>
+                  </div>
+                  
+                </div>
+              </div>
+              
+    
+            </div>
+          </div>
         </div>
+        
     </section>
+  </header>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <div class="container pt-5 pb-4 fw-bold">
+    <h3 class="fw-bold display-5"> Les derniers gossips </h3>
+  </div>
+
 
     <section class="container card-group">
     
@@ -18,14 +55,16 @@
       
         <div class="row row-cols-1 row-cols-md-2 g-4">
           <div class="col">
+
             <div class="card m-3 bg-white text-dark" style="width: 18rem;">
+              <p class="card-title text-muted text-center pt-3 small">Gossip numéro <%= gossip.id%></p>
               <img src="https://img.pngio.com/gossip-podcast-gossip-png-500_500.png" class="card-img-top" alt="...">
               <div class="card-body text-center">
-                <h5 class="card-title text-muted small">Gossip numéro <%= gossip.id%></h5>
+                
                 <p class="card-text ">Son titre: <%= gossip.title%></p>
                 <p class="card-text text-primary small"> Son auteur : <%= gossip.user.first_name%> </p>
-                <%= link_to "Lire son contenu", gossip_path(gossip.id), class:"btn btn-primary" %>
-                <p class="card-text "><%= gossip.likes.count %> <%= (gossip.likes.count) == 1 ? 'Like' : 'Likes'%></p>               
+                <%= link_to "Lire son contenu", gossip_path(gossip.id), class:"btn btn-warning" %>
+                <p class="card-text pt-3 "><%= gossip.likes.count %> <%= (gossip.likes.count) == 1 ? 'Like' : 'Likes'%></p>               
               </div>
             </div>
           </div>
