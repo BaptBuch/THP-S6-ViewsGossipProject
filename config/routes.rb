@@ -7,14 +7,20 @@ Rails.application.routes.draw do
   get '/contact', to: 'static_pages#contact'
 
   get '/welcome/:id', to: 'dynamic_pages#show'
+
+  get '/profile', to: 'static_pages#profile'
   
-  resources :gossips
+  resources :gossips do
+    resources :comments
+  end
 
   resources :users
 
   resources :cities
 
   resources :dynamic_pages
+
+  resources :sessions, only: [:new, :create, :destroy]
 
 end
 

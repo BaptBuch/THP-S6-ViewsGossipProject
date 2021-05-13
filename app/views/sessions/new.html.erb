@@ -1,0 +1,20 @@
+<%= form_tag url_for(action: 'create'), method: "post" do %>
+  <input type="hidden" name="authenticity_token" value=<%= form_authenticity_token %> >
+
+    <%= label_tag 'Email' %>
+    <%= text_field_tag 'email'%>
+    <br /> <br />
+
+    <%= label_tag 'Password' %>
+    <%= text_field_tag 'password'%>
+    <br /> <br />
+
+  <div class="mb-3 form-check">
+    <input type="checkbox" class="form-check-input" id="exampleCheck1">
+    <label class="form-check-label" for="exampleCheck1">Coches si tu trouves que je sers à rien</label>
+  </div>
+
+  <%= submit_tag "Se connecter" %>
+
+<% end %>
+
