@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'cities/show'
   root 'static_pages#index'
 
   get '/team', to: 'static_pages#team'
@@ -10,6 +11,8 @@ Rails.application.routes.draw do
   resources :gossips
 
   resources :users
+
+  resources :cities
 
   resources :dynamic_pages
 

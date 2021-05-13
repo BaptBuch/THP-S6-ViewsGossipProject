@@ -1,5 +1,17 @@
 <h1>Editer l'article </h1>
 
+<% if @gossip.errors.any? %>
+      <div class="alert alert-danger" role="alert">
+        <p>Nous n'avons pas réussi à créer le potin pour la (ou les) raison(s) suivante(s) :</p>
+        <ul>
+          <% @gossip.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>  
+    <% end %>
+
+
 <%= form_for @gossip do |f|%>
   <div class="form-group">
     <label>Titre du gossip</label>

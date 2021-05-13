@@ -3,7 +3,7 @@
 <p>
 Son prénom: <%= @user.first_name %> <br/>
 Son nom de famille: <%= @user.last_name %> <br/>
-Sa ville : <%= @user.city.name %> <br/>
+Sa ville : <%= link_to @user.city.name, city_path(@user.city_id)%> <br/>
 Son âge : <%= @user.age %> <br/>
 Son email : <%= @user.email %> <br/>
 </p>
