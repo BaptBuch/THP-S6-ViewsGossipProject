@@ -34,7 +34,7 @@
       <br /> <br />
 
       <%= label_tag 'Password' %>
-      <%= text_field_tag 'password', @user.password %>
+      <%= password_field_tag 'password', @user.password %>
       <br /> <br />
 
       <%= label_tag 'Description' %>
@@ -46,7 +46,7 @@
       <br /> <br />
 
       <%= label_tag 'Age' %>
-      <%= text_field_tag 'age', @user.age %>
+      <%= number_field_tag 'age', @user.age %>
       <br /> <br />
 
       <%= submit_tag "Create User" %>

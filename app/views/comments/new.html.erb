@@ -1,8 +1,10 @@
-<div id="comment-form">
-    <%= form_for @comment do |f| %>
-        <%= f.label :body %>
-        <%= f.text_area :body, class: "text-area" %>
-        <%= f.hidden_field :gossip_id %>
-        <%= f.submit %>
-    <% end %>
-</div>
+<% if @comment.errors.any? %>
+      <div class="alert alert-danger" role="alert">
+        <p>Nous n'avons pas réussi à créer le potin pour la (ou les) raison(s) suivante(s) :</p>
+        <ul>
+          <% @comment.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>  
+<% end %>

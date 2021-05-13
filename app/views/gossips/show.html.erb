@@ -1,3 +1,15 @@
+<% if @gossip.errors.any? %>
+      <div class="alert alert-danger" role="alert">
+        <p>Nous n'avons pas réussi à créer le potin pour la (ou les) raison(s) suivante(s) :</p>
+        <ul>
+          <% @gossip.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>  
+    <% end %>
+
+
 <h1>Hello , voici le gossip numéro <%= params[:id] %>  ! </h1>
 
 <p>
@@ -26,16 +38,35 @@ Créé le :<%= @gossip.created_at%> <br/>
 
 <p> Ajouter un commentaire </p>
  
-<div class="card my-1"> # place this card blow the post body.
-  <div class="card-body">
-    <p class="font-weight-bold">Comments</p>
-    <%= form_with(model: [@gossip, @gossip.comments.build]) do |f| %>
-      <div class="form-group">
-        <%= f.label 'New comment' %>
-        <%= f.text_area :body, class: 'form-control' %>
-      </div>
-      <%= f.submit 'Submit', class: 'btn btn-primary' %>
-    <% end %>
-  </div>
+  <%= form_tag(gossip_comments_path(@gossip), method: "post") do %>
+    <%= text_field_tag 'gossip_id', @id, type: 'hidden', class: 'form-control' %>
+     <div class="form-group">
+         <%= label_tag 'Nouveau commentaire' %>
+         <%= text_area_tag 'content', '', required: true, class: 'form-control' %>
+     </div>
+    <%= submit_tag "Envoyer", class: 'btn btn-outline-primary btn-sm' %>
+ <% end %>                
+
 </div>
 
+<div class="list-group mx-auto">
+
+    <% @gossip.comments.reverse.each do |comment| %>
+
+      <div class="list-group-item mb-2">
+        <div class="row">
+          <div class="col-9">
+              <p class="mb-1"><%= comment.content %></p>
+              <p class="mb-1"><%= comment.user.first_name%></p>
+            </div>
+            <div class="col-3 text-right">
+            <small><%= link_to "Edit", edit_gossip_comment_path(@gossip.id, comment.id) %></small>
+          </div>
+        </div>
+      </div>
+
+    <% end %>
+
+  </div>
+
+</div>
