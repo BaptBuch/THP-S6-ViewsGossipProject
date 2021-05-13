@@ -22,11 +22,32 @@ class CommentsController < ApplicationController
    end
 
   end  
+
+  def edit
+    @comment = Comment.find(params[:id])
+  end
+
+  def update
+    @gossip = Gossip.find(params[:gossip_id])
+    @comment = Comment.find(params[:id])
+    @comment.user = current_user
+    
+    if @comment.update(content: params[:content])  
+      flash[:success] = "Commentaire modifié !"
+      redirect_to gossip_path(@gossip.id)
+    else
+      render 'edit'
+    end
+  end
   
-  # private  
-  
-  # def find_gossip
-  #   @gossip = Gossip.find(params[:gossip_id])
-  # end
+  def destroy
+    @gossip = Gossip.find(params[:gossip_id])
+    @comment = Comment.find(params[:id])
+    
+    
+    @comment.destroy
+    flash[:success] = "Commentaire supprimé !"
+    redirect_to gossip_path(@gossip.id)
+  end
   
 end

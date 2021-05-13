@@ -60,7 +60,11 @@ Créé le :<%= @gossip.created_at%> <br/>
               <p class="mb-1"><%= comment.user.first_name%></p>
             </div>
             <div class="col-3 text-right">
+            <% if comment.user.id == current_user.id %>
             <small><%= link_to "Edit", edit_gossip_comment_path(@gossip.id, comment.id) %></small>
+            
+            <% end %>
+            
           </div>
         </div>
       </div>

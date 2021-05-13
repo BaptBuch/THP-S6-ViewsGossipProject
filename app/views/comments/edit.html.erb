@@ -1,0 +1,20 @@
+<% if @comment.errors.any? %>
+      <div class="alert alert-danger" role="alert">
+        <p>Nous n'avons pas réussi à créer le potin pour la (ou les) raison(s) suivante(s) :</p>
+        <ul>
+          <% @comment.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>  
+<% end %>
+
+<%= form_tag url_for(action: 'update'), method: "patch" do %>
+            <%= label_tag 'Content' %>
+            <%= text_area_tag 'content', @comment.content, class: "form-control" %>
+            <br/>
+
+            <%= submit_tag "Confirm", class: "btn btn-primary" %>
+            
+            <%= link_to "Delete Comment", gossip_comment_path, data: {confirm: "Êtes-vous sûr de vouloir supprimer votre commentaire ?"}, method: "delete", class: "btn btn-danger mb-0 ml-2" %>
+            <% end %>
