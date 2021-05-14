@@ -2,13 +2,13 @@ Rails.application.routes.draw do
   
   root 'static_pages#index'
 
-  get '/team', to: 'static_pages#team'
+  #get '/team', to: 'static_pages#team'
 
-  get '/contact', to: 'static_pages#contact'
+  #get '/contact', to: 'static_pages#contact'
 
-  get '/welcome/:id', to: 'dynamic_pages#show'
+  #get '/welcome/:id', to: 'dynamic_pages#show'
 
-  get '/profile', to: 'static_pages#profile'
+  #get '/profile', to: 'static_pages#profile'
   
   resources :gossips do
     resources :comments
@@ -22,10 +22,14 @@ Rails.application.routes.draw do
 
   resources :cities
 
-  resources :dynamic_pages
+  resources :static_pages
 
   resources :sessions, only: [:new, :create, :destroy]
 
-  resources :team, only: [:show]
+  resources :team, only: [:index]
+
+  resources :contact, only: [:index]
+
+  resources :profile, only: [:index, :edit, :update]
 
 end

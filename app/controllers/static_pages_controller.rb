@@ -5,4 +5,10 @@ class StaticPagesController < ApplicationController
     @user = User.all
   end
 
+  def contact
+  end
+
+  def team
+  end
+
 end

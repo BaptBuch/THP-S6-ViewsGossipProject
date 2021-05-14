@@ -17,12 +17,12 @@ Gossip.destroy_all
 end
 
 
-10.times do
-  cities_list = City.all
-  User.create!(first_name: Faker::Superhero.name, last_name: Faker::Superhero.suffix, description: Faker::Hipster.sentence, email:Faker::Internet.email, age: Faker::Number.between(from: 18, to: 100), city: cities_list.sample, password: Faker::Lorem.characters(number: 10))
-end
+# 10.times do
+#   cities_list = City.all
+#   User.create!(first_name: Faker::Superhero.name, last_name: Faker::Superhero.suffix, description: Faker::Hipster.sentence, email:Faker::Internet.email, age: Faker::Number.between(from: 18, to: 100), city: cities_list.sample, password: Faker::Lorem.characters(number: 10))
+# end
 
-20.times do
-  u = User.all.sample
-  gossip = Gossip.create(title: Faker::Lorem.word, content: Faker::Lorem.paragraph, user: u)
-end
+# 20.times do
+#   u = User.all.sample
+#   gossip = Gossip.create(title: Faker::Lorem.word, content: Faker::Lorem.paragraph, user: u)
+# end

@@ -13,12 +13,12 @@
   <header class="d-flex justify-content-center py-3 bg-dark text-light">
     <ul class="nav nav-pills ">
       <li class="nav-item "><%= link_to "Home", root_path, class: "nav-link text-light"%></li>
-      <li class="nav-item"><%= link_to "Team", team_path, class: "nav-link text-light"%></li>
-      <li class="nav-item"><%= link_to "Contact", contact_path, class: "nav-link text-light"%></li>
+      <li class="nav-item"><%= link_to "Team", team_index_path, class: "nav-link text-light"%></li>
+      <li class="nav-item"><%= link_to "Contact", contact_index_path, class: "nav-link text-light"%></li>
           
-      <%if current_user != nil %> 
+      <%if current_user  %> 
         <li class="nav-item">
-            <%= link_to User.find_by(id: session[:user_id]).first_name, profile_path, class: "nav-link text-light" %>
+            <%= link_to User.find_by(id: session[:user_id]).first_name, profile_index_path, class: "nav-link text-light" %>
         </li>
         <li class="nav-item">
             <%= link_to "Se déconnecter", session_path(session.id), class:"btn btn-danger", method: :delete %>

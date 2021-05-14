@@ -18,7 +18,7 @@ class SessionsController < ApplicationController
       remember(user)
   
       flash[:success] = 'Connexion réussie '
-      redirect_to(profile_path)
+      redirect_to(profile_index_path)
       
     # redirige où tu veux, avec un flash ou pas
 
@@ -32,8 +32,11 @@ class SessionsController < ApplicationController
   def destroy
     #logout
     
+    current_user = User.find_by(id: session[:user_id])
     session.delete(:user_id)
+    log_out(current_user)
     redirect_to(root_path)
+    
     #mettre un lien dans un bouton (par exemple) qui envoie la méthode delete:
     
   end

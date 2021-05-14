@@ -17,7 +17,7 @@ class UsersController < ApplicationController
     if @user.save
       log_in(@user)
       session[:user_id] = @user.id
-      redirect_to(profile_path)
+      redirect_to(profile_index_path)
     
     else
       render "new"
