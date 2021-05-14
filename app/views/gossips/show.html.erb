@@ -24,7 +24,7 @@
                   <% if @gossip.user_id == current_user.id %>
                   <p class="col-2"><%= link_to "Modifier ce gossip", edit_gossip_path(@gossip.id), class:"btn btn-outline-warning" %></p> 
                   <% end %>
-                  <p class="col-2"><%= link_to "Supprimer ce gossip", gossip_path(@gossip.id), class:"btn btn-danger", method: "delete"%></p>
+                  <p class="col-2"><%= link_to "Supprimer ce gossip", gossip_path(@gossip.id), data: {confirm: "Êtes-vous sûr de vouloir supprimer votre gossip ?"} class:"btn btn-danger", method: "delete"%></p>
       
                     <% pre_like = @gossip.likes.find { |like| like.user_id == current_user.id} %>
                   <% if pre_like %>

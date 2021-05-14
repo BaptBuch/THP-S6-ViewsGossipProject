@@ -12,7 +12,11 @@ class SessionsController < ApplicationController
 
     # on vérifie si l'utilisateur existe bien ET si on arrive à l'authentifier (méthode bcrypt) avec le mot de passe 
     if user && user.authenticate(params[:password])
-      session[:user_id] = user.id
+      log_in(user)
+
+      # on va cuisiner le cookie pour l'utilisateur
+      remember(user)
+  
       flash[:success] = 'Connexion réussie '
       redirect_to(profile_path)
       
@@ -27,6 +31,7 @@ class SessionsController < ApplicationController
 
   def destroy
     #logout
+    
     session.delete(:user_id)
     redirect_to(root_path)
     #mettre un lien dans un bouton (par exemple) qui envoie la méthode delete:

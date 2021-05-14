@@ -3,10 +3,6 @@
 
 <html>
 
-  <% flash.each do |k, v| %>
-      <div id="<%= k %>"><%= v %></div>
-  <% end %>
-
     <div class="container p-5 mb-4  rounded-3">
         <div class="container-fluid py-5">
             <h1 class="display-5 fw-bold">Bienvenue <%= User.find_by(id: session[:user_id]).first_name %> !</h1>
@@ -17,6 +13,7 @@
             <p class="col-md-8 fs-4">Description :<%= User.find_by(id: session[:user_id]).description %></p>
 
             <%= link_to "Se déconnecter",  session_path(session.id), class:'btn btn-danger text-light', method: :delete %>
+            <%= link_to "Supprimer ton profil", user_path(session[:user_id]), data: {confirm: "Êtes-vous sûr de vouloir supprimer votre profil ?"}, class:"btn btn-danger", method: "delete"%>
         </div>
     </div>
 </html>
