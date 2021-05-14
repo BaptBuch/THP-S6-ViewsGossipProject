@@ -1,6 +1,12 @@
-<h1>Nous contactes pas stp</h1>
-<h2>On en a pas envie</h2>
-<h3>Non, vraiment..</h3>
-<h4>On reçoit trop de potins !</h4>
-<h5>Mais si vraiment t'insistes...</h5>
-<h6>email@gossip-project.com</h6>
+Pour nous contacter, remplis ce formulaire ! <br/>
+
+<input type="hidden" name="authenticity_token" value=<%= form_authenticity_token %> >
+<%= label_tag 'Ton email' %>
+<%= text_field_tag 'email'%>
+<br /> <br />
+<%= label_tag 'Ton message' %>
+<%= text_area_tag 'content'%>
+<br /> <br />
+<%= link_to "Ecris nous", root_path, class:"btn btn-success" %>
+<br /> <br />
+Si tu préfères nous envoyer un email, c'est via : email@tgp.com :)
